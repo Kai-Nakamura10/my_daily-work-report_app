@@ -1,14 +1,11 @@
-version: '3.8'
-
 services:
   db:
-    image: postgres:14
+    image: mysql:8.0
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/mysql
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: myapp_development
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: myapp_development
 
   web:
     build: .
