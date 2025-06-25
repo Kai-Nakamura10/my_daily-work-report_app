@@ -1,2 +1,22 @@
 <h1>ようこそ、<%= current_user.name || current_user.email %> さん！</h1>
 <p>ログイン後の専用ページです。</p>
+
+<h2> 日報一覧</h2>
+<%= link_to "新規作成", new_report_path %>
+
+<div class="row mt-3">
+    <% @reports.each do |report| %>
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title"><%= report.title %></h5>
+                  <p class="card-text"><%= simple_format(report.body.truncate(100)) %></p>
+                  <p class="card-text">
+                    <small class="text-muted"><%= report.created_at.strftime('%Y/%m/%d') %></small>
+                  </p>
+                  <%= link_to '編集', edit_report_path(report), class: "btn btn-outline-primary btn-sm" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
