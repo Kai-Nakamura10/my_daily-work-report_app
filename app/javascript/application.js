@@ -1,3 +1,14 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "./controllers"
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteLinks = document.querySelectorAll(".js-confirm-delete");
+
+  deleteLinks.forEach(link => {
+    link.addEventListener("click", function(event) {
+      const confirmed = confirm("本当に削除してもよろしいですか？");
+      if (!confirmed) {
+        event.preventDefault(); // 送信キャンセル
+      }
+    });
+  });
+});

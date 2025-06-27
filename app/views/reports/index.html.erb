@@ -15,6 +15,7 @@
                     <small class="text-muted"><%= report.created_at.strftime('%Y/%m/%d') %></small>
                   </p>
                   <%= link_to '編集', edit_report_path(report), class: "btn btn-outline-primary btn-sm" %>
+                  <%= link_to "削除", report_path(report), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
                 </div>
             </div>
         </div>

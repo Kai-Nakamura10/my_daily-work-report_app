@@ -35,6 +35,13 @@ class ReportsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @report = Report.find(params[:id])
+    @report.destroy
+    redirect_to reports_path, notice: '日報を削除しました'
+  end
+
   private
 
   def set_report

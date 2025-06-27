@@ -28,6 +28,7 @@ gem 'sorcery', '0.16.3'
 
 gem 'jsbundling-rails'
 
+gem 'importmap-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
