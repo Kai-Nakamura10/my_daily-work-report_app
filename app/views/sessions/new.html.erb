@@ -1,17 +1,32 @@
-<%= form_with url: login_path do |f| %>
-  <div>
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="text-center mb-4">ログイン</h2>
+
+          <%= form_with url: login_path, local: true do |f| %>
+            <div class="mb-3">
+              <%= f.label :email, "メールアドレス", style: "color: #007bff;" %>
+              <%= f.email_field :email, class: "form-control form-control-lg", placeholder: "メールアドレスを入力" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, "パスワード", style: "color: #007bff;" %>
+              <%= f.password_field :password, class: "form-control form-control-lg", placeholder: "パスワードを入力" %>
+            </div>
+
+            <div class="d-grid">
+              <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+
+          <div class="text-center mt-3">
+            <%= link_to '登録ページ', new_user_path, class: "d-block" %>
+            <%= link_to 'パスワードをお忘れの方はこちら', '#', class: "d-block text-muted" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= f.label :password, "パスワード" %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-<div class ='text-center'>
-  <%= link_to '登録ページ', new_user_path %>
-  <%= link_to 'パスワードをお忘れの方はこちら', '#' %>
 </div>

@@ -1,23 +1,23 @@
-<h1>ユーザー登録</h1>
+<h1 class="text-center" style="color: #007bff;">ユーザー登録</h1>
 
 <%= form_with model: @user do |f| %>
   <div class="mb-3">
-    <%= f.label :name, "名前" %>
+    <%= f.label :name, "名前", style: "color: #007bff;" %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :email, "メールアドレス" %>
+    <%= f.label :email, "メールアドレス", style: "color: #007bff;" %>
     <%= f.email_field :email, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :password, "パスワード" %>
+    <%= f.label :password, "パスワード", style: "color: #007bff;" %>
     <%= f.password_field :password, class: "form-control" %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :password_confirmation, "パスワード（確認）" %>
+    <%= f.label :password_confirmation, "パスワード（確認）", style: "color: #007bff;" %>
     <%= f.password_field :password_confirmation, class: "form-control" %>
   </div>
 
