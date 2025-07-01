@@ -1,18 +1,20 @@
-<h1>新規日報作成</h1>
+<h1 class="text-center" style="color: #007bff;">新規日報作成</h1>
 
 <%= form_with model: @report, local: true do |f| %>
-    <div class="form-group">
-      <%= f.label :title, "タイトル" %><br>
-      <%= f.text_field :title, class: 'form-control', style: 'width: 100%' %>
-    </div>
+  <div class="form-group mb-3">
+    <%= f.label :title, "タイトル", style: "color: #007bff;" %><br>
+    <%= f.text_field :title, placeholder: "例：6月30日 作業内容まとめ", class: 'form-control', style: 'width: 100%' %>
+    <small class="form-text text-muted">業務日報の見出しを書いてください（例：◯月◯日の作業内容）</small>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :body, "本文" %><br>
-      <%= f.text_area :body, class: 'form-control', rows:10, style: 'width: 100%' %>
-    </div>
+  <div class="form-group mb-3">
+    <%= f.label :body, "本文", style: "color: #007bff;" %><br>
+    <%= f.text_area :body, placeholder: "例：・10時〜12時 タスクA実施\n・13時〜17時 ミーティングと資料作成", class: 'form-control', rows: 10, style: 'width: 100%' %>
+    <small class="form-text text-muted">その日の仕事内容や学び・反省点などを書きましょう</small>
+  </div>
 
-    <div style="margin-top: 1rem;">
-      <%= f.submit "登録", class: "btn btn-primary" %>
-      <%= link_to "一覧に戻る", reports_path, class: "btn btn-secondary", style: "margin-left: 10px;" %> 
-    </div>
+  <div class="mt-4">
+    <%= f.submit "登録", class: "btn btn-primary" %>
+    <%= link_to "一覧に戻る", reports_path, class: "btn btn-secondary", style: "margin-left: 10px;" %> 
+  </div>
 <% end %>
