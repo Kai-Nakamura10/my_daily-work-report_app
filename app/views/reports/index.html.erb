@@ -1,23 +1,26 @@
-<h1>ようこそ、<%= current_user.name || current_user.email %> さん！</h1>
-<p>ログイン後の専用ページです。</p>
+<h1 class="text-center" style="color: #007bff;">日報一覧</h1>
+<div class="text-center mb-3">
+  <%= link_to "新規作成", new_report_path, class: "btn btn-primary" %>
+</div>
 
-<h2> 日報一覧</h2>
-<%= link_to "新規作成", new_report_path %>
-
-<div class="row mt-3">
+<div class="container">
+  <div class="row justify-content-center">
     <% @reports.each do |report| %>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title"><%= report.title %></h5>
-                  <p class="card-text"><%= simple_format(report.body.truncate(100)) %></p>
-                  <p class="card-text">
-                    <small class="text-muted"><%= report.created_at.strftime('%Y/%m/%d') %></small>
-                  </p>
-                  <%= link_to '編集', edit_report_path(report), class: "btn btn-outline-primary btn-sm" %>
-                  <%= link_to "削除", report_path(report), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-                </div>
+      <div class="col-md-8">
+        <div class="card mb-4 shadow">
+          <div class="card-body">
+            <h4 class="card-title"><%= report.title %></h4>
+            <p class="card-text fs-5"><%= simple_format(report.body) %></p>
+            <p class="card-text text-end">
+              <small class="text-muted"><%= report.created_at.strftime('%Y/%m/%d') %></small>
+            </p>
+            <div class="d-flex justify-content-between">
+              <%= link_to '編集', edit_report_path(report), class: "btn btn-outline-primary" %>
+              <%= link_to "削除", report_path(report), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
             </div>
+          </div>
         </div>
+      </div>
     <% end %>
+  </div>
 </div>
