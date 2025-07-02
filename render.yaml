@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: v3-apuri
+    env: docker
+    plan: free
+    autoDeploy: true
+    buildCommand: ""  # Dockerfileを使う場合は空でOK
+    startCommand: ""  # CMDに任せる
+    envVars:
+      - key: RAILS_MASTER_KEY
+        value: your_actual_master_key_here  # ローカルの config/master.key の中身
+      - key: DATABASE_URL
+        fromDatabase:
+          name: v3-apuri-mysql
+          property: connectionString
+
+databases:
+  - name: v3-apuri-mysql
+    databaseName: v3_apuri_production
+    user: v3_apuri_user

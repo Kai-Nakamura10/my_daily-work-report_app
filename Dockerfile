@@ -1,20 +1,56 @@
-FROM ruby:3.1.4
+# ベースイメージ
+ARG RUBY_VERSION=3.2.4
+FROM ruby:$RUBY_VERSION
+
+# 環境変数
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
-RUN gem install rails -v "7.0.3.1"
+ENV RAILS_ENV=production \
+    BUNDLE_DEPLOYMENT=1 \
+    BUNDLE_PATH=/usr/local/bundle \
+    BUNDLE_WITHOUT="development:test"
+
+# 必要パッケージのインストール
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    curl \
+    gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g yarn \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
+
+# Bundler を Ruby 3.2.4 に対応する最新安定版（2.4.22）に上書きインストール
+RUN gem install bundler -v 2.4.22
+
+# Renderログ対策パッチ（必要なら残す）
 RUN echo "require 'logger'" >> /usr/local/lib/ruby/site_ruby/logger_patch.rb
 ENV RUBYOPT="-r/usr/local/lib/ruby/site_ruby/logger_patch.rb"
-RUN apt-get update -qq && \
-    apt-get install -y curl gnupg build-essential libpq-dev && \
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g yarn
-RUN mkdir /v3_apuri
-WORKDIR /v3_apuri
-RUN gem install bundler:2.3.17
-COPY Gemfile /v3_apuri/Gemfile
-COPY Gemfile.lock /v3_apuri/Gemfile.lock
-COPY yarn.lock /v3_apuri/yarn.lock
-RUN bundle install
+
+# 作業ディレクトリ作成
+WORKDIR /app
+
+# Gemfile と lock を先にコピーしてインストール
+COPY Gemfile Gemfile.lock ./
+RUN bundle config set frozen false && \
+    bundle install
+
+# yarn install
+COPY yarn.lock ./
 RUN yarn install
-COPY . /v3_apuri
+
+# アプリケーション本体をコピー
+COPY . .
+
+# アセットプリコンパイル
+RUN bundle exec rake assets:precompile
+
+# ポート公開（Render 用）
+EXPOSE 3000
+
+# サーバー起動コマンド
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

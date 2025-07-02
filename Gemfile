@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.4"
+ruby "3.2.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.7"
@@ -29,6 +29,10 @@ gem 'sorcery', '0.16.3'
 gem 'jsbundling-rails'
 
 gem 'importmap-rails'
+
+gem 'zeitwerk', '~> 2.7', '>= 2.7.3'
+
+gem 'multi_xml', '~> 0.7.2'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
