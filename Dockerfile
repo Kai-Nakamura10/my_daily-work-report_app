@@ -27,10 +27,6 @@ RUN apt-get update -qq && \
 # Bundler を Ruby 3.2.4 に対応する最新安定版（2.4.22）に上書きインストール
 RUN gem install bundler -v 2.4.22
 
-# Renderログ対策パッチ（必要なら残す）
-RUN echo "require 'logger'" >> /usr/local/lib/ruby/site_ruby/logger_patch.rb
-ENV RUBYOPT="-r/usr/local/lib/ruby/site_ruby/logger_patch.rb"
-
 # 作業ディレクトリ作成
 WORKDIR /app
 
