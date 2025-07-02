@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <link rel="icon" href="<%= asset_path 'memo.man2.jpg' %>" type="image/jpg">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <meta name="turbo-cache-control" content="no-cache">
   </head>
 
@@ -18,9 +18,9 @@
       <div class="container">
         <a class="navbar-brand" href="/">Workreports</a>
         <% if logged_in? %>
-          <%= link_to "Logout", logout_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-outline-light" %>
+          <%= button_to 'ログアウト', logout_path, method: :delete, form: { data: { turbo_frame: "_top" } }, data: { turbo_confirm: "ログアウトしますか？" }, class: "btn btn-outline-light" %>
         <% else %>
-          <%= link_to "Login", login_path, class: "btn btn-outline-light" %>
+          <%= link_to "ログイン", login_path, class: "btn btn-outline-light" %>
         <% end %>
       </div>
     </nav>
