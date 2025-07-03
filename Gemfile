@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.8", ">= 7.0.8.7"
 gem "sprockets-rails"
 
 # Use mysql as the database for Active Record
-gem "mysql2", "~> 0.5"
+gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -27,8 +27,6 @@ gem "jbuilder"
 gem 'sorcery', '0.16.3'
 
 gem 'jsbundling-rails'
-
-gem 'importmap-rails'
 
 gem 'zeitwerk', '~> 2.7', '>= 2.7.3'
 

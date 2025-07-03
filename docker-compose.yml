@@ -1,13 +1,12 @@
-version: "3.8"
-
 services:
   db:
-    image: mysql:8.0
+    image: postgres:15
     volumes:
-      - db_data:/var/lib/mysql
+      - pg_data:/var/lib/postgresql/data
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: myapp_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp_development
 
   web:
     build:
@@ -19,12 +18,15 @@ services:
       - .:/v3_apuri
     ports:
       - "3000:3000"
+    depends_on:
+      - db
     env_file:
       - .env
     environment:
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
-    depends_on:
-      - db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: db
 
 volumes:
-  db_data:
+  pg_data:
