@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
+import "./custom/data_method"
 document.addEventListener("DOMContentLoaded", () => {
   const deleteLinks = document.querySelectorAll(".js-confirm-delete");
 

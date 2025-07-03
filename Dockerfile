@@ -37,7 +37,7 @@ RUN bundle config set frozen false && \
     bundle install
 
 # yarn install
-COPY yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn install
 
 # アプリケーション本体をコピー
