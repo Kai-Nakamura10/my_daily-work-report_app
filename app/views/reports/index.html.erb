@@ -16,7 +16,7 @@
             </p>
             <div class="d-flex justify-content-between">
               <%= link_to '編集', edit_report_path(report), class: "btn btn-outline-primary" %>
-              <%= link_to '削除', report_path(report), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+               <%= link_to '削除', report_path(report), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
             </div>
           </div>
         </div>
